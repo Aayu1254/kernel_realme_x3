@@ -1,4 +1,4 @@
-name: Build on Tag
+name: Build on Push
 
 on:
   workflow_dispatch:
@@ -33,5 +33,6 @@ jobs:
     - name: Release build
       uses: ncipollo/release-action@v1
       with:
+        name: "Arcturus-X3-$(date '+%Y%m%d-%H%M').zip"
         artifacts: ${{ steps.build.outputs.outfile }}
         token: ${{ secrets.GITHUB_TOKEN }}
