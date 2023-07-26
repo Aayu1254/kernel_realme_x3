@@ -34,4 +34,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: output-kernel
-        path: ${{ steps.<step id>.outputs.outfile }}
+        path: ${{ steps.build.outputs.outfile }}
