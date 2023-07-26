@@ -29,10 +29,9 @@ jobs:
         compiler: aosp-clang/master/clang-r498229
         defconfig: x3_defconfig
         image: Image.gz-dtb
-
-    - name: Release build
-      uses: ncipollo/release-action@v1
+      
+    - name: Artifact upload
+      uses: actions/upload-artifact@v3
       with:
-        name: "Arcturus-X3-$(date '+%Y%m%d-%H%M').zip"
-        artifacts: ${{ steps.build.outputs.outfile }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+        name: output-kernel
+        path: ${{ steps.<step id>.outputs.outfile }}
