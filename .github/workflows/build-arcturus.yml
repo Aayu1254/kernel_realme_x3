@@ -3,17 +3,18 @@ name: Build on Tag
 on:
   workflow_dispatch:
   push:
-    tags: '*'
+    branches:
+    - msm-4.14-no-kp
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout kernel source
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Checkout zipper
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: lemniskett/AnyKernel3
         path: zipper
