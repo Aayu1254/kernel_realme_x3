@@ -24,8 +24,8 @@ jobs:
         NAME: Arcturus
       with:
         arch: arm64
-        compiler: gcc/10
-        defconfig: vince_defconfig
+        compiler: clang/15/binutils
+        defconfig: x3_defconfig
         image: Image.gz-dtb
 
     - name: Release build
