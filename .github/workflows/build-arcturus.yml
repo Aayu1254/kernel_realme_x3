@@ -26,7 +26,7 @@ jobs:
         NAME: Arcturus
       with:
         arch: arm64
-        compiler: clang/15/binutils
+        compiler: aosp-clang/master/clang-r450784d
         defconfig: x3_defconfig
         image: Image.gz-dtb
 
