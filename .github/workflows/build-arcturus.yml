@@ -35,3 +35,13 @@ jobs:
       with:
         name: output-kernel
         path: ${{ steps.build.outputs.outfile }}
+        
+    - name: Artifact upload
+
+      uses: actions/upload-artifact@v3
+
+      with:
+
+        name: output-dir
+
+        path: "/github/workspace/zipper"
