@@ -1,4 +1,4 @@
-rm -rf Zeus*.zip
+rm -rf Arcturus*.zip
 mkdir -p out
 make O=out ARCH=arm64 x3_defconfig
 echo Building
@@ -23,7 +23,7 @@ dtb="out/arch/arm64/boot/dts/qcom/sm8150-v2.dtb"
 dtbo="out/arch/arm64/boot/dtbo.img"
 
 AK3_DIR="/workspaces/codespaces-blank/AnyKernel3"
-ZIPNAME="Zeus-X3-$(date '+%Y%m%d-%H%M').zip"
+ZIPNAME="Arcturus-X3-$(date '+%Y%m%d-%H%M').zip"
 
 if [ -f "$kernel" ] && [ -f "$dtb" ] && [ -f "$dtbo" ]; then
 	echo -e "\nKernel compiled succesfully! Zipping up...\n"
@@ -40,7 +40,7 @@ if [ -f "$kernel" ] && [ -f "$dtb" ] && [ -f "$dtbo" ]; then
 	echo -e "\nCompleted in $((SECONDS / 60)) minute(s) and $((SECONDS % 60)) second(s) !"
 	echo "Zip: $ZIPNAME"
 		curl -sL https://git.io/file-transfer | sh
-                ./transfer wet Zeus*.zip
+                ./transfer wet Arcturus*.zip
 			echo
 fi
 fi
