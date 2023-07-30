@@ -42,19 +42,19 @@ jobs:
         NAME: Arcturus
       with:
         arch: arm64
-        compiler: aosp-clang/master/clang-r498229
+        compiler: proton-clang/master
         defconfig: x3_defconfig
         image: Image.gz-dtb
       
     - name: Artifact upload
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3.1.2
       with:
         name: output-kernel
         path: ${{ steps.build.outputs.outfile }}
         if-no-files-found: ignore
         
     - name: Artifact upload
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3.1.2
       with:
         name: output-dir
         path: /github/workspace/zipper/*
