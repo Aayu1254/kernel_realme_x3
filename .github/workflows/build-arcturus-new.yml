@@ -7,9 +7,9 @@ on:
     - msm-4.14-no-kp
 
 jobs:
-  permissions: write-all
   build:
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
     - name: Checkout kernel source
       uses: actions/checkout@v3
