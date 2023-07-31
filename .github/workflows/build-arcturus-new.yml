@@ -54,9 +54,9 @@ jobs:
         path: $GITHUB_WORKSPACE/AnyKernel3/Arcturus-*.zip
         if-no-files-found: ignore
         
-    -name: Find output
-     id: find
-     run: |
+    - name: Find output
+      id: find
+      run: |
         find -name Arcturus-*.zip >> $find
         echo "$find" >> "$GITHUB_ENV"
         
