@@ -40,16 +40,6 @@ jobs:
         TAG="${{ steps.last_tag.outputs.tag }}"
         if [ -z "$TAG" ]; then TAG=0; fi
         echo "NEXT_VER_CODE=$((TAG + 1))" >> $GITHUB_OUTPUT
-    
-    - name: Environment Setup
-      run: |
-        python_version="3"
-
-        echo "Updating distro..."
-        sudo apt-get update && apt-get upgrade -y
-        echo "Installing essential packages..."
-        sudo apt-get install -y --no-install-recommends git-core gnupg flex bison build-essential zip curl zlib1g-dev libc6-dev-i386 libncurses5 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig
-        echo "Done..."
       
     - name: Android kernel build
       run: ./kernelbuild.sh
