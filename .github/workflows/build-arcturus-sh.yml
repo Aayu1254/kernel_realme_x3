@@ -1,0 +1,71 @@
+name: Build on Push
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - msm-4.14-no-kp
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout kernel source
+      uses: actions/checkout@v3
+
+    - name: Checkout zipper
+      uses: actions/checkout@v3
+      with:
+        repository: Aayu1254/AnyKernel3
+        path: zipper
+
+    - name: Checkout toolchain
+      uses: actions/checkout@v3
+      with:
+        repository: kdrag0n/proton-clang
+        path: proton-clang
+    
+    - name: Get last tag
+      id: last_tag
+      uses: oprypin/find-latest-tag@v1
+      continue-on-error: true
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        repository: ${{ github.repository }}
+        releases-only: true
+        
+    - name: Get next version code
+      id: next_ver_code
+      run: |
+        TAG="${{ steps.last_tag.outputs.tag }}"
+        if [ -z "$TAG" ]; then TAG=0; fi
+        echo "NEXT_VER_CODE=$((TAG + 1))" >> $GITHUB_OUTPUT
+    
+    - name: Environment Setup
+      run: ./env-setup.sh
+      
+    - name: Android kernel build
+      run: ./kernelbuild.sh
+        
+    - name: Artifact upload
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        name: output-dir
+        path: $GITHUB_WORKSPACE/AnyKernel3/Arcturus-*.zip
+        if-no-files-found: ignore
+        
+    -name: Find output
+     id: find
+     run: |
+        find -name Arcturus-*.zip >> $find
+        echo "$find" >> "$GITHUB_ENV"
+        
+    - name: Upload to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: "${{ env.find }}"
+        release_name: Kernel
+        tag: ${{ steps.next_ver_code.outputs.NEXT_VER_CODE }}
+        file_glob: true
+        overwrite: true
