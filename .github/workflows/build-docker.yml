@@ -14,7 +14,7 @@ jobs:
       run: docker build --tag=builder $GITHUB_WORKSPACE/kernel_realme_x3/Dockerfile
       
     - name: Run docker
-      run: docker run --name=builder .
+      run: docker run --name=builder $GITHUB_WORKSPACE/kernel_realme_x3/.
       
     - name: Artifact upload
       uses: actions/upload-artifact@v3.1.2
