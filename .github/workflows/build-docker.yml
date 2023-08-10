@@ -9,12 +9,18 @@ jobs:
     steps:
     - name: Checkout kernel source
       uses: actions/checkout@v3
+      
+    - name: Find output
+      id: find
+      run: |
+        find -name Dockerfile >> $find
+        echo "$find" >> "$GITHUB_ENV"
     
     - name: Build docker image
-      run: docker build --tag=builder $GITHUB_WORKSPACE/Dockerfile
+      run: docker build --tag=builder $find
       
     - name: Run docker
-      run: docker run --name=builder $GITHUB_WORKSPACE/.
+      run: docker run --name=builder .
       
     - name: Artifact upload
       uses: actions/upload-artifact@v3.1.2
