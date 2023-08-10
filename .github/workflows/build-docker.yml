@@ -1,0 +1,24 @@
+name: Build with Docker
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout kernel source
+      uses: actions/checkout@v3
+    
+    - name: Build docker image
+      run: docker build --tag=builder
+      
+    - name: Run docker
+      run: docker run --name=builder
+      
+    - name: Artifact upload
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        name: output-dir
+        path: $GITHUB_WORKSPACE/Arcturus-*.zip
+        if-no-files-found: ignore
