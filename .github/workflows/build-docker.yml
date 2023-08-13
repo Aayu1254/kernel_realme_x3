@@ -10,17 +10,11 @@ jobs:
     - name: Checkout kernel source
       uses: actions/checkout@v3
 
-    - name: Cache
-      uses: actions/cache@v1.2.1
-      with:
-        path: ${{ github.workspace }}/proton-clang
-        key: ${{ secrets.cache_key }}
-
-    - name: Checkout toolchain
-      uses: actions/checkout@v3
-      with:
-        repository: kdrag0n/proton-clang
-        path: proton-clang
+#    - name: Checkout toolchain
+ #     uses: actions/checkout@v3
+  #    with:
+   #     repository: kdrag0n/proton-clang
+    #    path: proton-clang
       
     - name: Docker Run Action
       uses: addnab/docker-run-action@v3
@@ -29,7 +23,7 @@ jobs:
         options: -v ${{ github.workspace }}:/src
         run: |
           apt-get update && apt-get install -y sudo
-          sudo apt-get update
+          sudo apt-get update -y
           sudo apt-get install -y git
           sudo apt-get install -y build-essential
           sudo apt-get install -y gcc binutils make
