@@ -1,10 +1,9 @@
 #!/bin/bash
 #
-# Copyright (C) 2020-2021 Adithya R.
 
 SECONDS=0 # builtin bash timer
 ZIPNAME="Arcturus-X3-$(date '+%Y%m%d-%H%M').zip"
-TC_DIR="/home/aayu/kernel/proton-clang"
+TC_DIR="/src/proton-clang"
 DEFCONFIG="x3_defconfig"
 
 export PATH="$TC_DIR/bin:$PATH"
