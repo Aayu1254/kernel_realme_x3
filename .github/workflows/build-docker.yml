@@ -10,21 +10,18 @@ jobs:
     - name: Checkout kernel source
       uses: actions/checkout@v3
       
-    - name: Find output
-      id: find
-      run: |
-        find -name Dockerfile >> $find
-        echo "$find" >> "$GITHUB_ENV"
-    
-    - name: Build docker image
-      run: docker build --tag=builder $find
-      
-    - name: Run docker
-      run: docker run --name=builder .
+    - name: Docker Run Action
+      uses: addnab/docker-run-action@v3
+      with:
+        image: ubuntu:jammy
+        options: -v ${{ githun.workspace }}:/src
+        run: |
+          sudo apt-get update
+          ls
       
     - name: Artifact upload
       uses: actions/upload-artifact@v3.1.2
       with:
         name: output-dir
-        path: $GITHUB_WORKSPACE/Arcturus-*.zip
+        path: ${{ github.workspace }}/Arcturus-*.zip
         if-no-files-found: ignore
