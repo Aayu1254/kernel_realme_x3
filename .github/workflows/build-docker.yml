@@ -10,16 +10,16 @@ jobs:
     - name: Checkout kernel source
       uses: actions/checkout@v3
 
-#    - name: Checkout toolchain
- #     uses: actions/checkout@v3
-  #    with:
-   #     repository: kdrag0n/proton-clang
-    #    path: proton-clang
+    - name: Checkout toolchain
+      uses: actions/checkout@v3
+      with:
+        repository: kdrag0n/proton-clang
+        path: proton-clang
       
     - name: Docker Run Action
       uses: addnab/docker-run-action@v3
       with:
-        image: ubuntu:jammy
+        image: ubuntu:focal
         options: -v ${{ github.workspace }}:/src
         run: |
           apt-get update && apt-get install -y sudo
