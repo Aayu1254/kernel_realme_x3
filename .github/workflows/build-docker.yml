@@ -9,6 +9,12 @@ jobs:
     steps:
     - name: Checkout kernel source
       uses: actions/checkout@v3
+
+    - name: Checkout toolchain
+      uses: actions/checkout@v3
+      with:
+        repository: kdrag0n/proton-clang
+        path: proton-clang
       
     - name: Docker Run Action
       uses: addnab/docker-run-action@v3
@@ -16,8 +22,14 @@ jobs:
         image: ubuntu:jammy
         options: -v ${{ github.workspace }}:/src
         run: |
+          apt update && apt install -y sudo
           sudo apt-get update
+          sudo apt install -y git
           ls
+          cd src
+          ls
+          chmod +x kernelbuilder.sh
+          ./kernelbuilder.sh
       
     - name: Artifact upload
       uses: actions/upload-artifact@v3.1.2
