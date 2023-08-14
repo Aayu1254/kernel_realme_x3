@@ -19,7 +19,7 @@ jobs:
     - name: Docker Run Action
       uses: addnab/docker-run-action@v3
       with:
-        image: ubuntu:focal
+        image: ubuntu:jammy
         options: -v ${{ github.workspace }}:/src
         run: |
           apt-get update && apt-get install -y sudo
