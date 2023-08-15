@@ -33,13 +33,13 @@ jobs:
         echo "NEXT_VER_CODE=$((TAG + 1))" >> $GITHUB_OUTPUT
 
     - name: Android kernel build
-      uses: lemniskett/android-kernel-actions@master
+      uses: Aayu154/android-kernel-actions@master
       id: build
       env:
         NAME: Arcturus
       with:
         arch: arm64
-        compiler: proton-clang/master
+        compiler: aosp-clang/master/clang-r498229
         defconfig: x3_defconfig
         image: Image.gz-dtb
       
