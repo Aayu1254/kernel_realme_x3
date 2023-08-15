@@ -33,7 +33,7 @@ jobs:
         echo "NEXT_VER_CODE=$((TAG + 1))" >> $GITHUB_OUTPUT
 
     - name: Android kernel build
-      uses: Aayu154/android-kernel-actions@master
+      uses: Aayu1254/android-kernel-actions@master
       id: build
       env:
         NAME: Arcturus
