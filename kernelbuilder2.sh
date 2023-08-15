@@ -3,13 +3,13 @@
 
 SECONDS=0 # builtin bash timer
 ZIPNAME="Arcturus-X3-$(date '+%Y%m%d-%H%M').zip"
-TC_DIR="/src/aosp"
+#TC_DIR="/src/aosp"
 DEFCONFIG="x3_defconfig"
 
-export PATH="$TC_DIR/bin:$PATH"
+#export PATH="$TC_DIR/bin:$PATH"
 
 arch="arm64"
-compiler=aosp-clang/master/clang-r498229
+compiler=aosp-clang/master/clang-r487747c
 kernel_path="${KERNEL_PATH:-.}"
 python_version="${PYTHON_VERSION:-3}"
 name="${NAME:-kernel_realme_x3}"
@@ -179,13 +179,13 @@ else
     exit 100
 fi
 
-if ! [ -d "$TC_DIR" ]; then
-	echo "clang-proton not found! Cloning to $TC_DIR..."
-	if ! git clone https://github.com/kdrag0n/proton-clan "$TC_DIR"; then
-		echo "Cloning failed! Aborting..."
-		exit 1
-	fi
-fi
+#if ! [ -d "$TC_DIR" ]; then
+#	echo "clang-proton not found! Cloning to $TC_DIR..."
+#	if ! git clone https://github.com/kdrag0n/proton-clan "$TC_DIR"; then
+#		echo "Cloning failed! Aborting..."
+#		exit 1
+#	fi
+#fi
 
 if [[ $1 = "-r" || $1 = "--regen" ]]; then
 	make O=out ARCH=arm64 $DEFCONFIG savedefconfig
