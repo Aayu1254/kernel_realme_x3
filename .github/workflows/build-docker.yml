@@ -15,12 +15,26 @@ jobs:
   #    with:
    #     repository: kdrag0n/proton-clang
     #    path: proton-clang
+
+    - name: Get Toolchain
+      run: |
+        mkdir aosp
+        curl -L https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r498229.tar.gz --output aosp.tar.gz
+        tar -xf aosp.tar.gz -C "${{ github.workspace }}/aosp
       
     - name: Docker Run Action
       uses: addnab/docker-run-action@v3
       with:
         image: ubuntu:jammy
-        options: -v ${{ github.workspace }}:/src
+        options: -v ${{ github.workspace }}:/src bash -c 'export PATH=$PATH:/src/aosp/bin; bash'
+        #mkdir aosp
+         #mkdir down
+          #curl -L https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r498229.tar.gz --output /src/down/aosp.tar.gz
+          #tar -xf /src/down/aosp.tar.gz -C /src/aosp
+          #cd /src/aosp
+          #echo "bruh"
+          #ls
+          #cd /src
         run: |
           chmod u+x /src/kernelbuilder.sh
           apt-get update && apt-get install -y sudo
@@ -29,16 +43,8 @@ jobs:
           sudo apt install -y --no-install-recommends device-tree-compiler ca-certificates xz-utils
           ls
           echo "Changing directory to working directory"
-          cd src
-          ls
-          mkdir aosp
-          mkdir down
-          curl -L https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r498229.tar.gz --output /src/down/aosp.tar.gz
-          tar -xf /src/down/aosp.tar.gz -C /src/aosp
-          cd /src/aosp
-          echo "bruh"
-          ls
           cd /src
+          ls
           ./kernelbuilder.sh
       
     - name: Artifact upload
