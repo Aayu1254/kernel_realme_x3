@@ -3,7 +3,7 @@
 
 SECONDS=0 # builtin bash timer
 ZIPNAME="Arcturus-X3-$(date '+%Y%m%d-%H%M').zip"
-TC_DIR="/src/proton-clang"
+TC_DIR="/src/aosp"
 DEFCONFIG="x3_defconfig"
 
 export PATH="$TC_DIR/bin:$PATH"
