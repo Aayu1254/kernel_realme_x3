@@ -22,11 +22,11 @@ jobs:
         image: ubuntu:jammy
         options: -v ${{ github.workspace }}:/src
         run: |
-          chmod +x /src/kernelbuilder.sh
+          chmod u+x /src/kernelbuilder.sh
           apt-get update && apt-get install -y sudo
-          apt install -y --no-install-recommends git make bc bison openssl \
-          curl zip kmod cpio flex libelf-dev libssl-dev libtfm-dev wget \
-          device-tree-compiler ca-certificates xz-utils
+          sudo apt install -y --no-install-recommends git make bc bison openssl
+          sudo apt install -y --no-install-recommends curl zip kmod cpio flex libelf-dev libssl-dev libtfm-dev wget \
+          sudo apt install -y --no-install-recommends device-tree-compiler ca-certificates xz-utils
           ls
           echo "Changing directory to working directory"
           cd src
@@ -35,6 +35,10 @@ jobs:
           mkdir down
           curl -L https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r498229.tar.gz --output /src/down/aosp.tar.gz
           tar -xf /src/down/aosp.tar.gz -C /src/aosp
+          cd /src/aosp
+          echo "bruh"
+          ls
+          cd /src
           ./kernelbuilder.sh
       
     - name: Artifact upload
