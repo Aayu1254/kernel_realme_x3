@@ -20,7 +20,7 @@ jobs:
       run: |
         mkdir aosp
         curl -L https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r498229.tar.gz --output aosp.tar.gz
-        tar -xf aosp.tar.gz -C "${{ github.workspace }}/aosp
+        tar -xf aosp.tar.gz -C "${{ github.workspace }}/aosp"
       
     - name: Docker Run Action
       uses: addnab/docker-run-action@v3
