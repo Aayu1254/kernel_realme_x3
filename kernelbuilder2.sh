@@ -13,6 +13,7 @@ compiler=aosp-clang/master/clang-r498229
 kernel_path="${KERNEL_PATH:-.}"
 python_version="${PYTHON_VERSION:-3}"
 name="${NAME:-kernel_realme_x3}"
+extract_tarball="tar -xf"
 
 msg "Updating container..."
 apt update && apt upgrade -y
@@ -105,7 +106,7 @@ if [[ $arch = "arm64" ]]; then
         fi
 
         apt install -y --no-install-recommends libgcc-10-dev || exit 127
-        extract_tarball /tmp/proton-clang-"${ver_number}".tar.gz /
+        $extract_tarball /tmp/proton-clang-"${ver_number}".tar.gz /
         cd /proton-clang-"${ver_number}"* || exit 127
         proton_path="$(pwd)"
         cd "$workdir"/"$kernel_path" || exit 127
@@ -145,10 +146,10 @@ if [[ $arch = "arm64" ]]; then
         fi
 
         mkdir -p /aosp-clang /aosp-gcc-arm64 /aosp-gcc-arm /aosp-gcc-host
-        extract_tarball /tmp/aosp-clang.tar.gz /aosp-clang
-        extract_tarball /tmp/aosp-gcc-arm64.tar.gz /aosp-gcc-arm64
-        extract_tarball /tmp/aosp-gcc-arm.tar.gz /aosp-gcc-arm
-        extract_tarball /tmp/aosp-gcc-host.tar.gz /aosp-gcc-host
+        $extract_tarball /tmp/aosp-clang.tar.gz -C /aosp-clang
+        $extract_tarball /tmp/aosp-gcc-arm64.tar.gz -C /aosp-gcc-arm64
+        $extract_tarball /tmp/aosp-gcc-arm.tar.gz -C /aosp-gcc-arm
+        $extract_tarball /tmp/aosp-gcc-host.tar.gz -C /aosp-gcc-host
 
         for i in /aosp-gcc-host/bin/x86_64-linux-*; do
             ln -sf "$i" "${i/x86_64-linux-}"
