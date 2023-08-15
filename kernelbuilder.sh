@@ -6,7 +6,7 @@ ZIPNAME="Arcturus-X3-$(date '+%Y%m%d-%H%M').zip"
 TC_DIR="/src/aosp"
 DEFCONFIG="x3_defconfig"
 
-export PATH="$TC_DIR/bin:$PATH"
+export PATH="$PATH:$TC_DIR/bin"
 
 if ! [ -d "$TC_DIR" ]; then
 	echo "clang-proton not found! Cloning to $TC_DIR..."
