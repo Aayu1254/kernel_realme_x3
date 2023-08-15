@@ -10,11 +10,11 @@ jobs:
     - name: Checkout kernel source
       uses: actions/checkout@v3
 
-    - name: Checkout toolchain
-      uses: actions/checkout@v3
-      with:
-        repository: kdrag0n/proton-clang
-        path: proton-clang
+#    - name: Checkout toolchain
+ #     uses: actions/checkout@v3
+  #    with:
+   #     repository: kdrag0n/proton-clang
+    #    path: proton-clang
       
     - name: Docker Run Action
       uses: addnab/docker-run-action@v3
@@ -32,7 +32,7 @@ jobs:
           cd src
           ls
           chmod +x kernelbuilder.sh
-          ./kernelbuilder.sh
+          ./kernelbuilder2.sh
       
     - name: Artifact upload
       uses: actions/upload-artifact@v3.1.2
