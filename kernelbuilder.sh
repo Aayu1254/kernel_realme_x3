@@ -10,7 +10,7 @@ export PATH="$TC_DIR/bin:$PATH"
 
 if ! [ -d "$TC_DIR" ]; then
 	echo "clang-proton not found! Cloning to $TC_DIR..."
-	if ! git clone https://github.com/kdrag0n/proton-clang "$TC_DIR"; then
+	if ! git clone https://github.com/kdrag0n/proton-clan "$TC_DIR"; then
 		echo "Cloning failed! Aborting..."
 		exit 1
 	fi
