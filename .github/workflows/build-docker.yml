@@ -37,7 +37,7 @@ jobs:
           #cd /src
         run: |
           chmod u+x /src/kernelbuilder.sh
-          apt-get install -y sudo
+          apt-get update && apt-get install -y sudo
           sudo apt-get update
           sudo apt install -y --no-install-recommends git make bc bison openssl
           sudo apt install -y --no-install-recommends curl zip kmod cpio flex libelf-dev libssl-dev libtfm-dev wget
@@ -47,7 +47,8 @@ jobs:
           cd /src
           ls
           export PATH="/src/aosp/bin:$PATH"
-          ./kernelbuilder.sh
+          cd /src
+          bash /src/kernelbuilder.sh
       
     - name: Artifact upload
       uses: actions/upload-artifact@v3.1.2
